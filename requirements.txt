@@ -1,0 +1,42 @@
+# Qanas - Requirements
+# Author: Saudi Linux (SaudiLinux1@gmail.com)
+
+# Core dependencies
+requests>=2.25.1
+bs4>=0.0.1
+colorama>=0.4.4
+python-whois>=0.7.3
+dnspython>=2.1.0
+pyOpenSSL>=20.0.1
+fake-useragent>=0.1.11
+tqdm>=4.61.0
+argparse>=1.4.0
+pretty-html-table>=0.9.dev0
+
+# Web scanning
+beautifulsoup4>=4.9.3
+lxml>=4.6.3
+html5lib>=1.1
+
+# Network scanning
+scapy>=2.4.5
+python-nmap>=0.7.1
+
+# Reporting
+jinja2>=3.0.1
+markdown>=3.3.4
+pyyaml>=5.4.1
+
+# Utilities
+python-dotenv>=0.17.1
+cryptography>=3.4.7
+pillow>=8.2.0
+requests-futures>=1.0.0
+futures>=3.3.0
+
+# Optional dependencies
+# Uncomment if needed
+# selenium>=3.141.0
+# shodan>=1.25.0
+# censys>=2.0.9
+# pycryptodome>=3.10.1

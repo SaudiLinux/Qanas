@@ -1,0 +1,186 @@
+# دليل تكوين أداة Qanas (قناص)
+
+## مقدمة
+
+يوفر هذا الدليل شرحًا مفصلاً لكيفية تخصيص إعدادات أداة Qanas (قناص) لتناسب احتياجاتك. يمكن تعديل الإعدادات من خلال ملف `config.py` الموجود في المجلد الرئيسي للأداة.
+
+## ملف التكوين الرئيسي (config.py)
+
+يحتوي ملف `config.py` على جميع إعدادات الأداة، بما في ذلك:
+
+1. معلومات الأداة (الإصدار، المطور، الوصف)
+2. مسارات المجلدات الرئيسية
+3. مفاتيح API للخدمات الخارجية
+4. أوضاع الفحص وخياراتها
+5. قوائم الكلمات الافتراضية
+
+## تعديل المسارات
+
+### المجلدات الرئيسية
+
+يمكنك تعديل مسارات المجلدات الرئيسية في ملف `config.py`:
+
+```python
+# المجلد الرئيسي للأداة (يتم تحديده تلقائيًا)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# مجلد الوحدات (modules)
+MODULES_DIR = os.path.join(BASE_DIR, "modules")
+
+# مجلد النتائج (loot)
+LOOT_DIR = os.path.join(BASE_DIR, "loot")
+
+# مجلد القوالب (templates)
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+
+# مجلد الإضافات (plugins)
+PLUGINS_DIR = os.path.join(BASE_DIR, "plugins")
+
+# مجلد الأصول (assets)
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+
+# مجلد قوائم الكلمات (wordlists)
+WORDLISTS_DIR = os.path.join(BASE_DIR, "wordlists")
+```
+
+**ملاحظة**: إذا قمت بتغيير أي من هذه المسارات، تأكد من إنشاء المجلدات المقابلة يدويًا.
+
+## إضافة مفاتيح API
+
+لاستخدام بعض الميزات المتقدمة، يمكنك إضافة مفاتيح API للخدمات الخارجية:
+
+```python
+# مفاتيح API
+API_KEYS = {
+    "shodan": "",  # أدخل مفتاح API الخاص بـ Shodan
+    "censys": "",  # أدخل مفتاح API الخاص بـ Censys
+    "wpscan": ""   # أدخل مفتاح API الخاص بـ WPScan
+}
+```
+
+### كيفية الحصول على مفاتيح API
+
+1. **Shodan API**: قم بالتسجيل في [Shodan](https://account.shodan.io/register) والحصول على مفتاح API من لوحة التحكم.
+2. **Censys API**: قم بالتسجيل في [Censys](https://censys.io/register) والحصول على مفتاح API من إعدادات الحساب.
+3. **WPScan API**: قم بالتسجيل في [WPScan](https://wpscan.com/register) والحصول على مفتاح API من لوحة التحكم.
+
+## تخصيص أوضاع الفحص
+
+يمكنك تعديل إعدادات أوضاع الفحص المختلفة لتناسب احتياجاتك:
+
+```python
+# أوضاع الفحص
+SCAN_MODES = {
+    "normal": {
+        "description": "فحص عادي للهدف",
+        "intensity": 3,
+        "stealth": 2
+    },
+    "airstrike": {
+        "description": "فحص سريع لعدة أهداف",
+        "intensity": 2,
+        "stealth": 3
+    },
+    "nuke": {
+        "description": "فحص شامل ومكثف لعدة أهداف",
+        "intensity": 5,
+        "stealth": 1
+    }
+}
+```
+
+### معلمات أوضاع الفحص
+
+- **description**: وصف الوضع
+- **intensity**: شدة الفحص (1-5، حيث 5 هي الأعلى)
+- **stealth**: مستوى التخفي (1-5، حيث 5 هو الأعلى)
+
+## تخصيص خيارات الفحص الافتراضية
+
+يمكنك تعديل خيارات الفحص الافتراضية لكل نوع من أنواع الفحص:
+
+```python
+# خيارات الفحص الافتراضية
+DEFAULT_SCAN_OPTIONS = {
+    "port_scan": {
+        "quick": "-F -T4",  # خيارات Nmap للفحص السريع
+        "full": "-p- -T4 -A"  # خيارات Nmap للفحص الشامل
+    },
+    "web_scan": {
+        "quick": True,  # استخدام الفحص السريع للويب
+        "full": False,  # استخدام الفحص الشامل للويب
+        "extensions": [".php", ".asp", ".aspx", ".jsp", ".js", ".html", ".txt", ".zip", ".bak"]  # امتدادات الملفات للبحث
+    },
+    "dns": {
+        "wordlist": "subdomains-top1000.txt",  # قائمة الكلمات للبحث عن النطاقات الفرعية
+        "recursive": False  # تمكين البحث المتكرر
+    },
+    "vuln_scan": {
+        "enabled": True,  # تمكين فحص الثغرات
+        "intensity": 3  # شدة فحص الثغرات (1-5)
+    }
+}
+```
+
+## تخصيص قوائم الكلمات
+
+يمكنك تعديل قوائم الكلمات الافتراضية المستخدمة في عمليات الفحص المختلفة:
+
+```python
+# قوائم الكلمات الافتراضية
+DEFAULT_WORDLISTS = {
+    "subdomains": os.path.join(WORDLISTS_DIR, "subdomains", "subdomains-top1000.txt"),
+    "directories": os.path.join(WORDLISTS_DIR, "directories", "common.txt"),
+    "passwords": os.path.join(WORDLISTS_DIR, "passwords", "common-passwords.txt"),
+    "usernames": os.path.join(WORDLISTS_DIR, "usernames", "common-usernames.txt")
+}
+```
+
+## إضافة قوائم كلمات مخصصة
+
+يمكنك إضافة قوائم كلمات مخصصة عن طريق وضعها في المجلد المناسب داخل مجلد `wordlists` ثم تحديث ملف `config.py` للإشارة إليها.
+
+مثال لإضافة قائمة كلمات مخصصة للنطاقات الفرعية:
+
+1. قم بإنشاء ملف نصي يحتوي على قائمة النطاقات الفرعية (سطر واحد لكل نطاق فرعي)
+2. احفظ الملف في مجلد `wordlists/subdomains/` باسم `my-custom-subdomains.txt`
+3. قم بتحديث ملف `config.py`:
+
+```python
+DEFAULT_WORDLISTS = {
+    "subdomains": os.path.join(WORDLISTS_DIR, "subdomains", "my-custom-subdomains.txt"),
+    # باقي القوائم...
+}
+```
+
+## تخصيص إعدادات التقارير
+
+يمكنك تعديل إعدادات التقارير في ملف `config.py`:
+
+```python
+# إعدادات التقارير
+REPORT_OPTIONS = {
+    "format": "html",  # تنسيق التقرير (html, json, txt)
+    "include_screenshots": True,  # تضمين لقطات الشاشة في التقرير
+    "include_raw_data": True,  # تضمين البيانات الخام في التقرير
+    "max_vulnerabilities": 100  # الحد الأقصى لعدد الثغرات في التقرير
+}
+```
+
+## حفظ التغييرات
+
+بعد إجراء التغييرات على ملف `config.py`، احفظ الملف وأعد تشغيل الأداة لتطبيق الإعدادات الجديدة.
+
+## نصائح متقدمة
+
+1. **النسخ الاحتياطي**: قم بعمل نسخة احتياطية من ملف `config.py` قبل إجراء أي تغييرات.
+
+2. **التجربة**: قم بتجربة الإعدادات المختلفة على هدف آمن قبل استخدامها في بيئة الإنتاج.
+
+3. **التوثيق**: قم بتوثيق التغييرات التي تجريها على الإعدادات للرجوع إليها في المستقبل.
+
+4. **التحديث**: عند تحديث الأداة، قد تحتاج إلى دمج التغييرات الجديدة في ملف `config.py` الخاص بك.
+
+---
+
+تم إعداد هذا الدليل بواسطة فريق Saudi Linux. جميع الحقوق محفوظة © 2025.
