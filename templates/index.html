@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qanas - Scan Reports</title>
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #3498db;
+            --background-color: #1e1e1e;
+            --text-color: #f5f5f5;
+            --card-bg: #2d2d2d;
+            --border-color: #444;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --info-color: #3498db;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .logo {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+        
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .report-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .report-header {
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .report-header h3 {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .report-body {
+            padding: 15px;
+        }
+        
+        .report-info {
+            margin-bottom: 15px;
+        }
+        
+        .report-info p {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .report-info p span:first-child {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .report-footer {
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .badge-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .badge-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .badge-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 5px;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .pagination a.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .pagination a:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .no-reports {
+            text-align: center;
+            padding: 50px 0;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .no-reports h3 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .filter-container {
+                justify-content: space-between;
+            }
+            
+            .filter-select {
+                flex-grow: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="../assets/logo.svg" alt="Qanas Logo" class="logo">
+            <h1>Qanas Scan Reports</h1>
+            <p>Advanced Penetration Testing and Attack Surface Management Tool</p>
+        </header>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by target, date, or scan mode..." onkeyup="filterReports()">
+            </div>
+            
+            <div class="filter-container">
+                <select id="modeFilter" class="filter-select" onchange="filterReports()">
+                    <option value="">All Modes</option>
+                    <option value="normal">Normal</option>
+                    <option value="airstrike">Airstrike</option>
+                    <option value="nuke">Nuke</option>
+                </select>
+                
+                <select id="sortFilter" class="filter-select" onchange="filterReports()">
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                    <option value="target-asc">Target (A-Z)</option>
+                    <option value="target-desc">Target (Z-A)</option>
+                    <option value="vulns-desc">Most Vulnerabilities</option>
+                </select>
+            </div>
+        </div>
+        
+        <h2>Scan Reports</h2>
+        
+        <div id="reportsContainer" class="reports-grid">
+            {{#if reports.length}}
+                {{#each reports}}
+                <div class="report-card" data-target="{{target}}" data-date="{{scan_date}}" data-mode="{{scan_mode}}" data-vulns="{{total_vulnerabilities}}">
+                    <div class="report-header">
+                        <h3>{{target}}</h3>
+                    </div>
+                    <div class="report-body">
+                        <div class="report-info">
+                            <p>
+                                <span>Scan Date:</span>
+                                <span>{{scan_date}}</span>
+                            </p>
+                            <p>
+                                <span>Scan Mode:</span>
+                                <span>{{scan_mode}} <span class="badge badge-primary">{{scan_mode}}</span></span>
+                            </p>
+                            <p>
+                                <span>Open Ports:</span>
+                                <span>{{open_ports_count}}</span>
+                            </p>
+                            <p>
+                                <span>Vulnerabilities:</span>
+                                <span>{{total_vulnerabilities}} 
+                                    {{#if high_severity_count}}
+                                    <span class="badge badge-danger">{{high_severity_count}} High</span>
+                                    {{/if}}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="report-footer">
+                        <a href="{{report_path}}" class="btn">View Report</a>
+                    </div>
+                </div>
+                {{/each}}
+            {{else}}
+                <div class="no-reports">
+                    <h3>No scan reports found</h3>
+                    <p>Run a scan to generate reports</p>
+                    <a href="#" class="btn btn-primary" onclick="window.close()">Back to Qanas</a>
+                </div>
+            {{/if}}
+        </div>
+        
+        <div id="pagination" class="pagination">
+            <!-- Pagination will be generated by JavaScript -->
+        </div>
+        
+        <footer>
+            <p>Qanas - Advanced Penetration Testing Tool</p>
+            <p>Developed by Saudi Linux (SaudiLinux1@gmail.com)</p>
+            <p>Version: {{tool_version}}</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Filter reports based on search input and filters
+        function filterReports() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const modeFilter = document.getElementById('modeFilter').value.toLowerCase();
+            const sortFilter = document.getElementById('sortFilter').value;
+            const reportCards = document.querySelectorAll('.report-card');
+            
+            // Convert NodeList to Array for sorting
+            const reportCardsArray = Array.from(reportCards);
+            
+            // Sort reports
+            reportCardsArray.sort((a, b) => {
+                const aTarget = a.getAttribute('data-target').toLowerCase();
+                const bTarget = b.getAttribute('data-target').toLowerCase();
+                const aDate = new Date(a.getAttribute('data-date'));
+                const bDate = new Date(b.getAttribute('data-date'));
+                const aVulns = parseInt(a.getAttribute('data-vulns'));
+                const bVulns = parseInt(b.getAttribute('data-vulns'));
+                
+                switch(sortFilter) {
+                    case 'date-asc':
+                        return aDate - bDate;
+                    case 'date-desc':
+                        return bDate - aDate;
+                    case 'target-asc':
+                        return aTarget.localeCompare(bTarget);
+                    case 'target-desc':
+                        return bTarget.localeCompare(aTarget);
+                    case 'vulns-desc':
+                        return bVulns - aVulns;
+                    default:
+                        return bDate - aDate;
+                }
+            });
+            
+            // Hide all reports first
+            reportCards.forEach(card => {
+                card.style.display = 'none';
+            });
+            
+            // Filter and show matching reports
+            let visibleCount = 0;
+            reportCardsArray.forEach(card => {
+                const target = card.getAttribute('data-target').toLowerCase();
+                const date = card.getAttribute('data-date').toLowerCase();
+                const mode = card.getAttribute('data-mode').toLowerCase();
+                
+                if ((target.includes(searchInput) || date.includes(searchInput) || mode.includes(searchInput)) && 
+                    (modeFilter === '' || mode === modeFilter)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                }
+            });
+            
+            // Update pagination
+            updatePagination(visibleCount);
+            
+            // Show message if no reports match
+            const reportsContainer = document.getElementById('reportsContainer');
+            if (visibleCount === 0) {
+                let noReports = document.querySelector('.no-reports');
+                if (!noReports) {
+                    noReports = document.createElement('div');
+                    noReports.className = 'no-reports';
+                    noReports.innerHTML = `
+                        <h3>No matching reports found</h3>
+                        <p>Try adjusting your search criteria</p>
+                    `;
+                    reportsContainer.appendChild(noReports);
+                }
+            } else {
+                const noReports = document.querySelector('.no-reports');
+                if (noReports) {
+                    noReports.remove();
+                }
+            }
+        }
+        
+        // Update pagination based on visible reports
+        function updatePagination(visibleCount) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            const reportsPerPage = 12;
+            const pageCount = Math.ceil(visibleCount / reportsPerPage);
+            
+            if (pageCount <= 1) {
+                return;
+            }
+            
+            // Add previous button
+            const prevLink = document.createElement('a');
+            prevLink.href = '#';
+            prevLink.innerHTML = '&laquo;';
+            prevLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const activePage = document.querySelector('.pagination a.active');
+                if (activePage && activePage.previousElementSibling && activePage.previousElementSibling !== prevLink) {
+                    activePage.previousElementSibling.click();
+                }
+            });
+            pagination.appendChild(prevLink);
+            
+            // Add page numbers
+            for (let i = 1; i <= pageCount; i++) {
+                const pageLink = document.createElement('a');
+                pageLink.href = '#';
+                pageLink.textContent = i;
+                if (i === 1) {
+                    pageLink.className = 'active';
+                }
+                pageLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.pagination a').forEach(a => a.classList.remove('active'));
+                    pageLink.classList.add('active');
+                    showPage(i, reportsPerPage);
+                });
+                pagination.appendChild(pageLink);
+            }
+            
+            // Add next button
+            const nextLink = document.createElement('a');
+            nextLink.href = '#';
+            nextLink.innerHTML = '&raquo;';
+            nextLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const activePage = document.querySelector('.pagination a.active');
+                if (activePage && activePage.nextElementSibling && activePage.nextElementSibling !== nextLink) {
+                    activePage.nextElementSibling.click();
+                }
+            });
+            pagination.appendChild(nextLink);
+            
+            // Show first page
+            showPage(1, reportsPerPage);
+        }
+        
+        // Show specific page of reports
+        function showPage(pageNum, reportsPerPage) {
+            const visibleReports = Array.from(document.querySelectorAll('.report-card[style="display: block;"]'));
+            const startIndex = (pageNum - 1) * reportsPerPage;
+            const endIndex = startIndex + reportsPerPage;
+            
+            visibleReports.forEach((report, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    report.style.display = 'block';
+                } else {
+                    report.style.display = 'none';
+                }
+            });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            filterReports();
+        });
+    </script>
+</body>
+</html>
