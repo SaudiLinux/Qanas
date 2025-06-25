@@ -1,0 +1,317 @@
+# Common Google and GitHub Dorks for Security Research
+# Format: dork_type,dork,description
+
+# Google Dorks - Sensitive Files
+google,filetype:pdf site:[domain] confidential,Find confidential PDF documents
+google,filetype:xls OR filetype:xlsx site:[domain] password,Find Excel files containing passwords
+google,filetype:txt site:[domain] password,Find text files containing passwords
+google,filetype:log site:[domain],Find log files
+google,filetype:env site:[domain],Find environment files with potential secrets
+google,filetype:ini site:[domain],Find configuration files
+google,filetype:cfg site:[domain],Find configuration files
+google,filetype:conf site:[domain],Find configuration files
+google,filetype:config site:[domain],Find configuration files
+google,filetype:xml site:[domain],Find XML files
+google,filetype:sql site:[domain],Find SQL files
+google,filetype:bak site:[domain],Find backup files
+google,filetype:backup site:[domain],Find backup files
+google,filetype:old site:[domain],Find old versions of files
+google,filetype:zip site:[domain],Find zip archives
+google,filetype:tar site:[domain],Find tar archives
+google,filetype:gz site:[domain],Find gzip archives
+google,filetype:rar site:[domain],Find RAR archives
+
+# Google Dorks - Exposed Panels and Interfaces
+google,site:[domain] inurl:admin,Find admin panels
+google,site:[domain] inurl:login,Find login pages
+google,site:[domain] inurl:dashboard,Find dashboard interfaces
+google,site:[domain] inurl:config,Find configuration pages
+google,site:[domain] inurl:setup,Find setup pages
+google,site:[domain] inurl:phpinfo,Find PHP info pages
+google,site:[domain] inurl:phpmyadmin,Find phpMyAdmin installations
+google,site:[domain] inurl:server-status,Find Apache server status pages
+google,site:[domain] inurl:wp-admin,Find WordPress admin panels
+google,site:[domain] inurl:wp-login,Find WordPress login pages
+google,site:[domain] inurl:wp-config,Find WordPress configuration files
+google,site:[domain] inurl:jenkins,Find Jenkins instances
+google,site:[domain] inurl:jira,Find Jira instances
+google,site:[domain] inurl:gitlab,Find GitLab instances
+google,site:[domain] inurl:grafana,Find Grafana dashboards
+google,site:[domain] inurl:prometheus,Find Prometheus instances
+google,site:[domain] inurl:kibana,Find Kibana dashboards
+
+# Google Dorks - Error Messages
+google,site:[domain] "SQL syntax error",Find SQL syntax errors
+google,site:[domain] "error occurred",Find generic error messages
+google,site:[domain] "debug information",Find debug information
+google,site:[domain] "warning",Find warning messages
+google,site:[domain] "exception",Find exception messages
+google,site:[domain] "traceback",Find Python tracebacks
+google,site:[domain] "stack trace",Find stack traces
+google,site:[domain] "undefined index",Find PHP undefined index errors
+google,site:[domain] "Notice: Undefined",Find PHP undefined notices
+google,site:[domain] "Fatal error",Find PHP fatal errors
+
+# Google Dorks - API and Keys
+google,site:[domain] intext:"api_key",Find API keys
+google,site:[domain] intext:"apikey",Find API keys
+google,site:[domain] intext:"api key",Find API keys
+google,site:[domain] intext:"client_secret",Find client secrets
+google,site:[domain] intext:"client_id",Find client IDs
+google,site:[domain] intext:"access_token",Find access tokens
+google,site:[domain] intext:"secret_key",Find secret keys
+google,site:[domain] intext:"aws_access_key",Find AWS access keys
+google,site:[domain] intext:"aws_secret_key",Find AWS secret keys
+google,site:[domain] intext:"firebase",Find Firebase configurations
+google,site:[domain] intext:"AKIA",Find AWS access key IDs
+
+# Google Dorks - Specific Technologies
+google,site:[domain] intext:"index of /",Find directory listings
+google,site:[domain] ext:php intext:"mysql_query",Find PHP MySQL queries
+google,site:[domain] ext:php intext:"mysqli_query",Find PHP MySQLi queries
+google,site:[domain] ext:php intext:"SELECT * FROM",Find PHP SQL queries
+google,site:[domain] ext:jsp,Find JSP files
+google,site:[domain] ext:asp,Find ASP files
+google,site:[domain] ext:aspx,Find ASP.NET files
+google,site:[domain] ext:cfm,Find ColdFusion files
+google,site:[domain] ext:rb,Find Ruby files
+google,site:[domain] ext:py,Find Python files
+google,site:[domain] ext:pl,Find Perl files
+google,site:[domain] ext:go,Find Go files
+
+# GitHub Dorks - Secrets and Credentials
+github,"[domain]" password,Find passwords related to domain
+github,"[domain]" api_key,Find API keys related to domain
+github,"[domain]" apikey,Find API keys related to domain
+github,"[domain]" secret,Find secrets related to domain
+github,"[domain]" token,Find tokens related to domain
+github,"[domain]" config,Find configuration files related to domain
+github,"[domain]" credentials,Find credentials related to domain
+github,"[domain]" passwd,Find password files related to domain
+github,"[domain]" ftp,Find FTP credentials related to domain
+github,"[domain]" ssh,Find SSH keys related to domain
+github,"[domain]" aws_access_key,Find AWS access keys related to domain
+github,"[domain]" aws_secret_key,Find AWS secret keys related to domain
+github,"[domain]" private_key,Find private keys related to domain
+github,"[domain]" client_secret,Find client secrets related to domain
+github,"[domain]" client_id,Find client IDs related to domain
+github,"[domain]" AKIA,Find AWS access key IDs related to domain
+
+# GitHub Dorks - Specific File Types
+github,"[domain]" filename:.env,Find .env files related to domain
+github,"[domain]" filename:config.php,Find PHP config files related to domain
+github,"[domain]" filename:wp-config.php,Find WordPress config files related to domain
+github,"[domain]" filename:configuration.php,Find configuration files related to domain
+github,"[domain]" filename:settings.py,Find Python settings files related to domain
+github,"[domain]" filename:database.yml,Find Ruby on Rails database config files related to domain
+github,"[domain]" filename:config.yml,Find YAML config files related to domain
+github,"[domain]" filename:config.json,Find JSON config files related to domain
+github,"[domain]" filename:credentials.json,Find JSON credentials files related to domain
+github,"[domain]" filename:id_rsa,Find SSH private keys related to domain
+github,"[domain]" filename:htpasswd,Find htpasswd files related to domain
+github,"[domain]" filename:backup,Find backup files related to domain
+
+# GitHub Dorks - Code Patterns
+github,"[domain]" "BEGIN RSA PRIVATE KEY",Find RSA private keys related to domain
+github,"[domain]" "BEGIN OPENSSH PRIVATE KEY",Find OpenSSH private keys related to domain
+github,"[domain]" "BEGIN DSA PRIVATE KEY",Find DSA private keys related to domain
+github,"[domain]" "BEGIN EC PRIVATE KEY",Find EC private keys related to domain
+github,"[domain]" "Authorization: Bearer",Find Bearer tokens related to domain
+github,"[domain]" "Authorization: Basic",Find Basic Auth credentials related to domain
+github,"[domain]" "mysql_query",Find MySQL queries related to domain
+github,"[domain]" "mysqli_query",Find MySQLi queries related to domain
+github,"[domain]" "SELECT * FROM",Find SQL queries related to domain
+github,"[domain]" "INSERT INTO",Find SQL insert statements related to domain
+
+# GitHub Dorks - Security Issues
+github,"[domain]" "SQL injection",Find SQL injection issues related to domain
+github,"[domain]" "XSS",Find Cross-Site Scripting issues related to domain
+github,"[domain]" "CSRF",Find Cross-Site Request Forgery issues related to domain
+github,"[domain]" "IDOR",Find Insecure Direct Object Reference issues related to domain
+github,"[domain]" "vulnerability",Find vulnerability discussions related to domain
+github,"[domain]" "security issue",Find security issues related to domain
+github,"[domain]" "CVE",Find CVE references related to domain
+github,"[domain]" "exploit",Find exploits related to domain
+github,"[domain]" "hack",Find hacking attempts related to domain
+
+# Shodan Dorks
+shodan,hostname:"[domain]",Find hosts related to domain
+shodan,ssl:"[domain]",Find SSL certificates related to domain
+shodan,http.title:"Index of /",Find directory listings
+shodan,http.title:"Dashboard",Find dashboard interfaces
+shodan,http.title:"Admin",Find admin interfaces
+shodan,http.title:"Login",Find login pages
+shodan,"X-Jenkins",Find Jenkins instances
+shodan,"X-Drupal-Cache",Find Drupal sites
+shodan,product:"Apache httpd",Find Apache web servers
+shodan,product:"nginx",Find Nginx web servers
+shodan,product:"Microsoft IIS",Find IIS web servers
+shodan,product:"Kubernetes",Find Kubernetes clusters
+shodan,product:"Docker",Find Docker instances
+shodan,product:"MongoDB",Find MongoDB instances
+shodan,product:"MySQL",Find MySQL instances
+shodan,product:"PostgreSQL",Find PostgreSQL instances
+shodan,product:"Redis",Find Redis instances
+shodan,product:"Elasticsearch",Find Elasticsearch instances
+shodan,product:"Memcached",Find Memcached instances
+shodan,product:"RDP",Find RDP services
+shodan,product:"VNC",Find VNC services
+shodan,product:"FTP",Find FTP services
+shodan,product:"SSH",Find SSH services
+shodan,product:"Telnet",Find Telnet services
+shodan,product:"SMTP",Find SMTP services
+shodan,product:"POP3",Find POP3 services
+shodan,product:"IMAP",Find IMAP services
+shodan,product:"SNMP",Find SNMP services
+shodan,product:"DNS",Find DNS services
+shodan,product:"NTP",Find NTP services
+shodan,product:"LDAP",Find LDAP services
+shodan,product:"SMB",Find SMB services
+shodan,product:"NetBIOS",Find NetBIOS services
+shodan,product:"RTSP",Find RTSP services
+shodan,product:"SIP",Find SIP services
+shodan,product:"VoIP",Find VoIP services
+shodan,product:"SCADA",Find SCADA systems
+shodan,product:"ICS",Find Industrial Control Systems
+shodan,product:"PLC",Find Programmable Logic Controllers
+shodan,product:"HMI",Find Human Machine Interfaces
+shodan,product:"IoT",Find Internet of Things devices
+shodan,product:"Camera",Find IP cameras
+shodan,product:"DVR",Find Digital Video Recorders
+shodan,product:"NVR",Find Network Video Recorders
+shodan,product:"Printer",Find printers
+shodan,product:"Router",Find routers
+shodan,product:"Switch",Find switches
+shodan,product:"Firewall",Find firewalls
+shodan,product:"VPN",Find VPN services
+shodan,product:"WAF",Find Web Application Firewalls
+shodan,product:"IDS",Find Intrusion Detection Systems
+shodan,product:"IPS",Find Intrusion Prevention Systems
+shodan,product:"UTM",Find Unified Threat Management systems
+shodan,product:"SIEM",Find Security Information and Event Management systems
+shodan,product:"DLP",Find Data Loss Prevention systems
+shodan,product:"EDR",Find Endpoint Detection and Response systems
+shodan,product:"AV",Find Antivirus systems
+shodan,product:"MDM",Find Mobile Device Management systems
+shodan,product:"NAC",Find Network Access Control systems
+shodan,product:"PAM",Find Privileged Access Management systems
+shodan,product:"IAM",Find Identity and Access Management systems
+shodan,product:"SSO",Find Single Sign-On systems
+shodan,product:"MFA",Find Multi-Factor Authentication systems
+shodan,product:"2FA",Find Two-Factor Authentication systems
+shodan,product:"OTP",Find One-Time Password systems
+shodan,product:"TOTP",Find Time-based One-Time Password systems
+shodan,product:"HOTP",Find HMAC-based One-Time Password systems
+shodan,product:"RADIUS",Find RADIUS servers
+shodan,product:"TACACS",Find TACACS servers
+shodan,product:"Kerberos",Find Kerberos servers
+shodan,product:"SAML",Find SAML services
+shodan,product:"OAuth",Find OAuth services
+shodan,product:"OpenID",Find OpenID services
+shodan,product:"JWT",Find JWT services
+shodan,product:"API",Find API services
+shodan,product:"REST",Find REST services
+shodan,product:"SOAP",Find SOAP services
+shodan,product:"GraphQL",Find GraphQL services
+shodan,product:"gRPC",Find gRPC services
+shodan,product:"WebSocket",Find WebSocket services
+shodan,product:"WebRTC",Find WebRTC services
+shodan,product:"MQTT",Find MQTT services
+shodan,product:"AMQP",Find AMQP services
+shodan,product:"Kafka",Find Kafka services
+shodan,product:"RabbitMQ",Find RabbitMQ services
+shodan,product:"ZeroMQ",Find ZeroMQ services
+shodan,product:"NATS",Find NATS services
+shodan,product:"STOMP",Find STOMP services
+shodan,product:"JMS",Find JMS services
+shodan,product:"XMPP",Find XMPP services
+shodan,product:"IRC",Find IRC services
+shodan,product:"IMAP",Find IMAP services
+shodan,product:"POP3",Find POP3 services
+shodan,product:"SMTP",Find SMTP services
+shodan,product:"NNTP",Find NNTP services
+shodan,product:"RSS",Find RSS services
+shodan,product:"Atom",Find Atom services
+shodan,product:"WebDAV",Find WebDAV services
+shodan,product:"CalDAV",Find CalDAV services
+shodan,product:"CardDAV",Find CardDAV services
+shodan,product:"LDAP",Find LDAP services
+shodan,product:"DHCP",Find DHCP services
+shodan,product:"DNS",Find DNS services
+shodan,product:"NTP",Find NTP services
+shodan,product:"SNMP",Find SNMP services
+shodan,product:"TFTP",Find TFTP services
+shodan,product:"NFS",Find NFS services
+shodan,product:"SMB",Find SMB services
+shodan,product:"AFP",Find AFP services
+shodan,product:"CIFS",Find CIFS services
+shodan,product:"iSCSI",Find iSCSI services
+shodan,product:"FCoE",Find FCoE services
+shodan,product:"SAN",Find SAN services
+shodan,product:"NAS",Find NAS services
+shodan,product:"DAS",Find DAS services
+shodan,product:"RAID",Find RAID services
+shodan,product:"Backup",Find Backup services
+shodan,product:"Archive",Find Archive services
+shodan,product:"Storage",Find Storage services
+shodan,product:"Cloud",Find Cloud services
+shodan,product:"CDN",Find CDN services
+shodan,product:"Load Balancer",Find Load Balancer services
+shodan,product:"Proxy",Find Proxy services
+shodan,product:"Reverse Proxy",Find Reverse Proxy services
+shodan,product:"WAF",Find WAF services
+shodan,product:"Cache",Find Cache services
+shodan,product:"CDN",Find CDN services
+shodan,product:"DDoS",Find DDoS protection services
+shodan,product:"Firewall",Find Firewall services
+shodan,product:"IDS",Find IDS services
+shodan,product:"IPS",Find IPS services
+shodan,product:"UTM",Find UTM services
+shodan,product:"SIEM",Find SIEM services
+shodan,product:"SOC",Find SOC services
+shodan,product:"NOC",Find NOC services
+shodan,product:"MDR",Find MDR services
+shodan,product:"XDR",Find XDR services
+shodan,product:"EDR",Find EDR services
+shodan,product:"EPP",Find EPP services
+shodan,product:"AV",Find AV services
+shodan,product:"DLP",Find DLP services
+shodan,product:"CASB",Find CASB services
+shodan,product:"CSPM",Find CSPM services
+shodan,product:"CWPP",Find CWPP services
+shodan,product:"CNAPP",Find CNAPP services
+shodan,product:"CIEM",Find CIEM services
+shodan,product:"IAM",Find IAM services
+shodan,product:"PAM",Find PAM services
+shodan,product:"PIM",Find PIM services
+shodan,product:"PUM",Find PUM services
+shodan,product:"SSO",Find SSO services
+shodan,product:"MFA",Find MFA services
+shodan,product:"2FA",Find 2FA services
+shodan,product:"OTP",Find OTP services
+shodan,product:"TOTP",Find TOTP services
+shodan,product:"HOTP",Find HOTP services
+shodan,product:"RADIUS",Find RADIUS services
+shodan,product:"TACACS",Find TACACS services
+shodan,product:"Kerberos",Find Kerberos services
+shodan,product:"SAML",Find SAML services
+shodan,product:"OAuth",Find OAuth services
+shodan,product:"OpenID",Find OpenID services
+shodan,product:"JWT",Find JWT services
+shodan,product:"API",Find API services
+shodan,product:"REST",Find REST services
+shodan,product:"SOAP",Find SOAP services
+shodan,product:"GraphQL",Find GraphQL services
+shodan,product:"gRPC",Find gRPC services
+shodan,product:"WebSocket",Find WebSocket services
+shodan,product:"WebRTC",Find WebRTC services
+shodan,product:"MQTT",Find MQTT services
+shodan,product:"AMQP",Find AMQP services
+shodan,product:"Kafka",Find Kafka services
+shodan,product:"RabbitMQ",Find RabbitMQ services
+shodan,product:"ZeroMQ",Find ZeroMQ services
+shodan,product:"NATS",Find NATS services
+shodan,product:"STOMP",Find STOMP services
+shodan,product:"JMS",Find JMS services
+shodan,product:"XMPP",Find XMPP services
+shodan,product:"IRC",Find IRC services
