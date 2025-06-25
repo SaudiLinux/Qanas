@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#1a1a1a"/>
+  
+  <!-- Outer Ring -->
+  <circle cx="100" cy="100" r="85" stroke="#00ccff" stroke-width="2" fill="none"/>
+  
+  <!-- Middle Ring with Glow -->
+  <circle cx="100" cy="100" r="70" stroke="#00ccff" stroke-width="1.5" fill="none" filter="url(#glow)"/>
+  
+  <!-- Inner Ring -->
+  <circle cx="100" cy="100" r="55" stroke="#00ccff" stroke-width="1" fill="none"/>
+  
+  <!-- Radar Sweep Animation -->
+  <path d="M100,100 L100,30 A70,70 0 0,1 160,100 Z" fill="#00ccff" opacity="0.2">
+    <animateTransform
+      attributeName="transform"
+      attributeType="XML"
+      type="rotate"
+      from="0 100 100"
+      to="360 100 100"
+      dur="5s"
+      repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Crosshair Lines -->
+  <line x1="100" y1="20" x2="100" y2="180" stroke="#00ccff" stroke-width="0.5" opacity="0.5"/>
+  <line x1="20" y1="100" x2="180" y2="100" stroke="#00ccff" stroke-width="0.5" opacity="0.5"/>
+  
+  <!-- Circular Grid Lines -->
+  <circle cx="100" cy="100" r="40" stroke="#00ccff" stroke-width="0.5" opacity="0.3" fill="none"/>
+  <circle cx="100" cy="100" r="25" stroke="#00ccff" stroke-width="0.5" opacity="0.3" fill="none"/>
+  
+  <!-- Magnifying Glass -->
+  <circle cx="150" cy="150" r="20" stroke="#00ccff" stroke-width="2" fill="none"/>
+  <line x1="165" y1="165" x2="180" y2="180" stroke="#00ccff" stroke-width="3"/>
+  
+  <!-- Letter Q -->
+  <text x="100" y="115" font-family="Arial, sans-serif" font-size="70" font-weight="bold" text-anchor="middle" fill="#00ccff">Q</text>
+  
+  <!-- Small Target Points -->
+  <circle cx="70" cy="60" r="2" fill="#ff3333"/>
+  <circle cx="130" cy="80" r="2" fill="#ff3333"/>
+  <circle cx="90" cy="140" r="2" fill="#ff3333"/>
+  
+  <!-- Glow Filter -->
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Arabic Text for Qanas -->
+  <text x="100" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#ffffff">قناص</text>
+</svg>

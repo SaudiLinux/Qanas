@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#1a1a2e" />
+  
+  <!-- Outer Ring -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#16213e" stroke-width="5" />
+  
+  <!-- Inner Design - Stylized Q for Qanas -->
+  <path d="M100 40 C65 40, 40 65, 40 100 C40 135, 65 160, 100 160 C135 160, 160 135, 160 100 C160 65, 135 40, 100 40 Z M100 60 C125 60, 140 75, 140 100 C140 125, 125 140, 100 140 C75 140, 60 125, 60 100 C60 75, 75 60, 100 60 Z" fill="#0f3460" />
+  
+  <!-- Target Crosshair -->
+  <circle cx="100" cy="100" r="15" fill="#e94560" />
+  <circle cx="100" cy="100" r="10" fill="#0f3460" />
+  <circle cx="100" cy="100" r="5" fill="#e94560" />
+  
+  <!-- Horizontal and Vertical Lines -->
+  <line x1="30" y1="100" x2="170" y2="100" stroke="#e94560" stroke-width="2" />
+  <line x1="100" y1="30" x2="100" y2="170" stroke="#e94560" stroke-width="2" />
+  
+  <!-- Diagonal Line (representing a scope or targeting) -->
+  <line x1="140" y1="140" x2="170" y2="170" stroke="#e94560" stroke-width="4" />
+  
+  <!-- Arabic Text for Qanas -->
+  <text x="100" y="190" font-family="Arial, sans-serif" font-size="20" fill="#e94560" text-anchor="middle" dominant-baseline="middle">قناص</text>
+</svg>
